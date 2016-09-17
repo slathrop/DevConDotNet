@@ -28,7 +28,7 @@ class WebCLI {
         var self = this, ctrlStyle = self.ctrlEl.style;
 
         //Ctrl + Backquote (Document)
-        if (e.ctrlKey && e.keyCode == 192) {
+        if (e.ctrlKey && e.altKey && e.keyCode == 192) {
             if (ctrlStyle.display == "none") {
                 ctrlStyle.display = "";
                 self.focus();
@@ -80,7 +80,8 @@ class WebCLI {
         var tokens = txt.split(" "),
             cmd = tokens[0].toUpperCase();
 
-        if (cmd === "CLS") { self.outputEl.innerHTML = ""; return; }
+        if (cmd === "EXIT") { self.ctrlEl.style.display = "none"; self.showGreeting(); return; }
+        if (cmd === "CLS") { self.showGreeting(); return; }
         if (cmd === "IMG") { self.writeHTML("<img src='https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'>"); return; }
         if (cmd === "YOUTUBE") {
             self.writeHTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/OJRpatLMUuE?autoplay=1" frameborder="0" allowfullscreen></iframe>');
@@ -148,7 +149,8 @@ class WebCLI {
     }
 
     showGreeting() {
-        this.writeLine("Web CLI [Version 0.0.1]", "cmd");
+        this.outputEl.innerHTML = "";
+        this.writeLine("Web CLI [Version 0.0.2]", "cmd");
         this.newLine();
     }
 
