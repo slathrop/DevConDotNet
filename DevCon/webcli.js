@@ -27,7 +27,7 @@ class WebCLI {
     onKeyDown(e) {
         var self = this, ctrlStyle = self.ctrlEl.style;
 
-        //Ctrl + Backquote (Document)
+        // Ctrl+Alt+Backquote (Document)
         if (e.ctrlKey && e.altKey && e.keyCode == 192) {
             if (ctrlStyle.display == "none") {
                 ctrlStyle.display = "";
