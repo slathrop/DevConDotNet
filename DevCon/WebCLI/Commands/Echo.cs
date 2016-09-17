@@ -5,7 +5,7 @@
     {
         public ConsoleResult Run(string[] args)
         {
-            if(args.Length > 1)
+            if (args.Length > 1)
             {
                 return new ConsoleResult(args[1]);
             }

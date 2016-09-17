@@ -3,7 +3,7 @@
 namespace DevCon
 {
     [ConsoleCommand("img", "Displays an image")]
-    public class Img: IConsoleCommand
+    public class Img : IConsoleCommand
     {
         public ConsoleResult Run(string[] args)
         {

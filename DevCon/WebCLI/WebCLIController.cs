@@ -8,7 +8,7 @@ namespace DevCon
 {
     public class WebCLIController : ApiController
     {
-        public static readonly Type       AttributeType = typeof(ConsoleCommandAttribute);
+        public static readonly Type AttributeType = typeof(ConsoleCommandAttribute);
         public static readonly List<Type> CommandTypes;
 
         static WebCLIController()
@@ -23,20 +23,20 @@ namespace DevCon
         public ConsoleResult Post([FromBody]CommandInput command)
         {
             var args = command.GetArgs();
-            var cmd  = args.First().ToUpper();
+            var cmd = args.First().ToUpper();
             Type cmdTypeToRun = null;
 
             //Get command type
             foreach (var cmdType in CommandTypes)
             {
                 var attr = (ConsoleCommandAttribute)cmdType.GetTypeInfo().GetCustomAttributes(AttributeType).FirstOrDefault();
-                if(attr != null && attr.Name.ToUpper() == cmd)
+                if (attr != null && attr.Name.ToUpper() == cmd)
                 {
                     cmdTypeToRun = cmdType; break;
                 }
             }
-            if(cmdTypeToRun == null) { return new ConsoleErrorResult(); }
-            
+            if (cmdTypeToRun == null) { return new ConsoleErrorResult(); }
+
 
             //Instantiate and run the command
             try

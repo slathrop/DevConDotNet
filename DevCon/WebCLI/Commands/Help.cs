@@ -19,8 +19,8 @@ namespace DevCon
                                                 .FirstOrDefault() as ConsoleCommandAttribute;
                 if (attr == null) { continue; }
 
-                sb.Append("<tr><td class='webcli-lbl'>" + HttpUtility.HtmlEncode(attr.Name) 
-                           + "</td> <td>:</td> <td class='webcli-val'>" 
+                sb.Append("<tr><td class='webcli-lbl'>" + HttpUtility.HtmlEncode(attr.Name)
+                           + "</td> <td>:</td> <td class='webcli-val'>"
                            + HttpUtility.HtmlEncode(attr.Description) + "</td></tr>");
             }
             sb.Append("</table>");

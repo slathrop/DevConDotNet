@@ -7,7 +7,7 @@ namespace DevCon
     {
         public ConsoleResult Run(string[] args)
         {
-            if(args.Length != 3) { return new ConsoleErrorResult("Exactly 2 operands required"); }
+            if (args.Length != 3) { return new ConsoleErrorResult("Exactly 2 operands required"); }
 
             double x = double.Parse(args[1]);
             double y = double.Parse(args[2]);

@@ -12,10 +12,10 @@ namespace DevCon
             var result = "";
 
             //If drive specified, show just that drive's space
-            if(args.Length > 1)
+            if (args.Length > 1)
             {
                 var drive = drives.Single(d => d.Name.ToLower() == args[1].ToLower());
-                result    = GetDriveSpace(drive);
+                result = GetDriveSpace(drive);
             }
             else //Show all drives
             {
