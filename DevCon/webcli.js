@@ -97,7 +97,7 @@ class WebCLI {
             if (cmd === "CLS") { self.showGreeting(); return; }
             if (cmd === "IMG") { self.writeHTML("<img src='https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'>"); return; }
             if (cmd === "YOUTUBE") {
-                self.writeHTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/OJRpatLMUuE?autoplay=1" frameborder="0" allowfullscreen></iframe>');
+                self.writeHTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/JaVjmi7MDEs?autoplay=1" frameborder="0" allowfullscreen></iframe>');
                 return;
             }
         }
