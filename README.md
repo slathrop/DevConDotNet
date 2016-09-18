@@ -12,5 +12,5 @@ So basically, an up-to-date version of Chrome or Firefox.
 Load the solution in Visual Studio (say, VStudio 2015 Community Edition) and then:
 
 - Press F5 to run the site in Debug mode
-- With the site running in Chrome or Firefox, press Shift+Ctrl+Backquote to open the CLI
+- With the site running in Chrome or Firefox, press `Shift+Ctrl+Backquote` to open the CLI
 - Enter the `help` command and press `Enter` to see a list of available sample commands
