@@ -2,6 +2,6 @@
 {
     public interface IMultiStepConsoleCommand
     {
-        ConsoleResult RunStep(int stepNum, string[] args);
+        ConsoleResult RunStep(string[] args);
     }
 }

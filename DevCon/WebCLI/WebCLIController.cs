@@ -22,8 +22,23 @@ namespace DevCon
         // POST: api/webcli
         public ConsoleResult Post([FromBody]CommandInput command)
         {
-            var args = command.GetArgs();
-            var cmd = args.First().ToUpper();
+            string[] args = null;
+            string cmd = null;
+            var inMultiStepCmd = !string.IsNullOrEmpty(command.multiStepCmd);
+
+            if (inMultiStepCmd)
+            {
+                args = new string[command.multiStepCmdArgs.Length + 1];
+                args[0] = command.multiStepCmd;
+                Array.Copy(command.multiStepCmdArgs, 0, args, 1, command.multiStepCmdArgs.Length);
+                cmd = command.multiStepCmd.ToUpper();
+            }
+            else
+            {
+                args = command.GetArgs();
+                cmd = args.First().ToUpper();
+            }
+
             Type cmdTypeToRun = null;
 
             // Get command type
@@ -32,7 +47,8 @@ namespace DevCon
                 var attr = (ConsoleCommandAttribute)cmdType.GetTypeInfo().GetCustomAttributes(AttributeType).FirstOrDefault();
                 if (attr != null && attr.Name.ToUpper() == cmd)
                 {
-                    cmdTypeToRun = cmdType; break;
+                    cmdTypeToRun = cmdType;
+                    break;
                 }
             }
 
@@ -42,7 +58,15 @@ namespace DevCon
             try
             {
                 var cmdObj = Activator.CreateInstance(cmdTypeToRun) as IConsoleCommand;
-                return cmdObj.Run(args);
+                if (inMultiStepCmd && cmdObj is IMultiStepConsoleCommand)
+                {
+                    var multiStepCmdObj = cmdObj as IMultiStepConsoleCommand;
+                    return multiStepCmdObj.RunStep(args);
+                }
+                else
+                {
+                    return cmdObj.Run(args);
+                }
             }
             catch
             {

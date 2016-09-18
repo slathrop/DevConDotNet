@@ -88,30 +88,45 @@ class WebCLI {
         if (txt === "") { return; } // If empty, stop processing
         self.history.push(txt);     // Add cmd to history
 
-        // Client command
-        var tokens = txt.split(" "),
-            cmd = tokens[0].toUpperCase();
+        if (!self.inMultiStepCmd) {
+            // Client command?
+            var tokens = txt.split(" "),
+                cmd = tokens[0].toUpperCase();
 
-        if (cmd === "EXIT") { self.ctrlEl.style.display = "none"; self.showGreeting(); return; }
-        if (cmd === "CLS") { self.showGreeting(); return; }
-        if (cmd === "IMG") { self.writeHTML("<img src='https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'>"); return; }
-        if (cmd === "YOUTUBE") {
-            self.writeHTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/OJRpatLMUuE?autoplay=1" frameborder="0" allowfullscreen></iframe>');
-            return;
+            if (cmd === "EXIT") { self.ctrlEl.style.display = "none"; self.showGreeting(); return; }
+            if (cmd === "CLS") { self.showGreeting(); return; }
+            if (cmd === "IMG") { self.writeHTML("<img src='https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'>"); return; }
+            if (cmd === "YOUTUBE") {
+                self.writeHTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/OJRpatLMUuE?autoplay=1" frameborder="0" allowfullscreen></iframe>');
+                return;
+            }
         }
 
         // Server command
         self.busy(true);
+        if (self.inMultiStepCmd) {
+            self.multiStepCmdArgs.push(txt);
+            cmd = { multiStepCmd: self.inMultiStepCmd, multiStepCmdArgs: self.multiStepCmdArgs };
+        }
+        else cmd = { cmdLine: txt };
         fetch("/api/webcli",
         {
             method: "post",
             headers: new Headers({ "Content-Type": "application/json" }),
-            body: JSON.stringify({ cmdLine: txt })
+            body: JSON.stringify(cmd)
         })
         .then(function (r) { return r.json(); })
         .then(function (result) {
             var output = result.output;
             var style = result.isError ? "error" : "ok";
+
+            if (result.multiStepCmdName) {
+                self.inMultiStepCmd = result.multiStepCmdName;
+            }
+            else {
+                self.inMultiStepCmd = '';
+                self.multiStepCmdArgs = [];
+            }
 
             if (result.isHTML) {
                 self.writeHTML(output);
