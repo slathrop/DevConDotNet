@@ -1,7 +1,7 @@
 /*Font
 -----------------------------------------------------*/
-.webcli, .webcli-input {
-    font: 15px/15px 'Lucida Console', 'Consolas', 'Courier New' !important;
+.webcli, .webcli-input-container, .webcli-prompt, .webcli-input {
+    font: 14px/14px 'Lucida Console', 'Consolas', 'Courier New' !important;
 }
 
 /*Control
@@ -22,8 +22,25 @@
 
 /*Input
 -----------------------------------------------------*/
+.webcli-input-container {
+    display: table;
+    width: 100%;
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.webcli-prompt {
+    display: table-cell;
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
 .webcli-input {
-    display: block;
+    display: table-cell;
     width: 100%;
     background: transparent;
     border: none;
