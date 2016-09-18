@@ -105,6 +105,7 @@
     <Compile Include="WebCLI\Infrastructure\ConsoleCommandAttribute.cs" />
     <Compile Include="WebCLI\Infrastructure\ConsoleResult.cs" />
     <Compile Include="WebCLI\Infrastructure\IConsoleCommand.cs" />
+    <Compile Include="WebCLI\Infrastructure\IMultiStepConsoleCommand.cs" />
     <Compile Include="WebCLI\WebCLIController.cs" />
   </ItemGroup>
   <ItemGroup>

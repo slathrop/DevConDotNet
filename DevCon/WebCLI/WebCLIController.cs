@@ -19,14 +19,14 @@ namespace DevCon
             CommandTypes = types.Where(t => t.GetInterfaces().Contains(type)).ToList();
         }
 
-        //POST: api/webcli
+        // POST: api/webcli
         public ConsoleResult Post([FromBody]CommandInput command)
         {
             var args = command.GetArgs();
             var cmd = args.First().ToUpper();
             Type cmdTypeToRun = null;
 
-            //Get command type
+            // Get command type
             foreach (var cmdType in CommandTypes)
             {
                 var attr = (ConsoleCommandAttribute)cmdType.GetTypeInfo().GetCustomAttributes(AttributeType).FirstOrDefault();
@@ -35,10 +35,10 @@ namespace DevCon
                     cmdTypeToRun = cmdType; break;
                 }
             }
+
             if (cmdTypeToRun == null) { return new ConsoleErrorResult(); }
 
-
-            //Instantiate and run the command
+            // Instantiate and run the command
             try
             {
                 var cmdObj = Activator.CreateInstance(cmdTypeToRun) as IConsoleCommand;

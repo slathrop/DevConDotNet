@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DevCon
+﻿namespace DevCon
 {
     [ConsoleCommand("add", "Adds 2 numbers together")]
     public class Add : IConsoleCommand

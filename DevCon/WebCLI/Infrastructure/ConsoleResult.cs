@@ -2,9 +2,9 @@
 {
     public class ConsoleResult
     {
-        public string output { get; set; } = "";     //Holds the success or error output
-        public bool isError { get; set; } = false;  //Is the output a text string or an HTML string?
-        public bool isHTML { get; set; } = false;  //True if output is an error message
+        public string output { get; set; } = "";    // Holds the success or error output
+        public bool isError { get; set; } = false;  // Is the output a text string or an HTML string?
+        public bool isHTML { get; set; } = false;   // True if output is an error message
 
         public ConsoleResult() { }
         public ConsoleResult(string output)

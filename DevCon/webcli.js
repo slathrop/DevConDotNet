@@ -1,8 +1,8 @@
 class WebCLI {
     constructor() {
         var self = this;
-        self.history = [];   //Command history
-        self.cmdOffset = 0;    //Reverse offset into history
+        self.history = [];     // Command history
+        self.cmdOffset = 0;    // Reverse offset into history
 
         self.createElements();
         self.wireEvents();
@@ -41,14 +41,14 @@ class WebCLI {
 
         if (self.isBusy) { return; }
 
-        //Other keys (when input has focus)
+        // Other keys (when input has focus)
         if (self.inputEl === document.activeElement) {
-            switch (e.keyCode)  //http://keycode.info/
+            switch (e.keyCode)  // http://keycode.info/
             {
-                case 13: //Enter
+                case 13: // Enter
                     return self.runCmd();
 
-                case 38: //Up
+                case 38: // Up
                     if ((self.history.length + self.cmdOffset) > 0) {
                         self.cmdOffset--;
                         self.inputEl.value = self.history[self.history.length + self.cmdOffset];
@@ -56,7 +56,7 @@ class WebCLI {
                     }
                     break;
 
-                case 40: //Down
+                case 40: // Down
                     if (self.cmdOffset < -1) {
                         self.cmdOffset++;
                         self.inputEl.value = self.history[self.history.length + self.cmdOffset];
@@ -70,13 +70,13 @@ class WebCLI {
     runCmd() {
         var self = this, txt = self.inputEl.value.trim();
 
-        self.cmdOffset = 0;         //Reset history index
-        self.inputEl.value = "";    //Clear input
-        self.writeLine(txt, "cmd"); //Write cmd to output
-        if (txt === "") { return; }  //If empty, stop processing
-        self.history.push(txt);     //Add cmd to history
+        self.cmdOffset = 0;         // Reset history index
+        self.inputEl.value = "";    // Clear input
+        self.writeLine(txt, "cmd"); // Write cmd to output
+        if (txt === "") { return; } // If empty, stop processing
+        self.history.push(txt);     // Add cmd to history
 
-        //Client command:
+        // Client command
         var tokens = txt.split(" "),
             cmd = tokens[0].toUpperCase();
 
@@ -88,7 +88,7 @@ class WebCLI {
             return;
         }
 
-        //Server command:
+        // Server command
         self.busy(true);
         fetch("/api/webcli",
         {
@@ -157,27 +157,27 @@ class WebCLI {
     createElements() {
         var self = this, doc = document;
 
-        //Create & store CLI elements
-        self.ctrlEl = doc.createElement("div");   //CLI control (outer frame)
-        self.outputEl = doc.createElement("div");   //Div holding console output
-        self.inputEl = doc.createElement("input"); //Input control
-        self.busyEl = doc.createElement("div");   //Busy animation
+        // Create & store CLI elements
+        self.ctrlEl = doc.createElement("div");     // CLI control (outer frame)
+        self.outputEl = doc.createElement("div");   // Div holding console output
+        self.inputEl = doc.createElement("input");  // Input control
+        self.busyEl = doc.createElement("div");     // Busy animation
 
-        //Add classes
+        // Add classes
         self.ctrlEl.className = "webcli";
         self.outputEl.className = "webcli-output";
         self.inputEl.className = "webcli-input";
         self.busyEl.className = "webcli-busy";
 
-        //Add attribute
+        // Add attribute
         self.inputEl.setAttribute("spellcheck", "false");
 
-        //Assemble them
+        // Assemble them
         self.ctrlEl.appendChild(self.outputEl);
         self.ctrlEl.appendChild(self.inputEl);
         self.ctrlEl.appendChild(self.busyEl);
 
-        //Hide ctrl & add to DOM
+        // Hide ctrl & add to DOM
         self.ctrlEl.style.display = "none";
         doc.body.appendChild(self.ctrlEl);
     }
