@@ -30,6 +30,15 @@ class WebCLI {
     onKeyDown(e) {
         var self = this, ctrlStyle = self.ctrlEl.style;
 
+        // Ctrl+C (Break out of any multi-step cmd)
+        if (e.ctrlKey && e.keyCode === 67) {
+            self.inMultiStepCmd = '';
+            self.multiStepCmdArgs = [];
+            self.writeLine('^');
+            self.newLine();
+            return;
+        }
+
         // Shift+Ctrl+Backquote (Document)
         if (e.shiftKey && e.ctrlKey && e.keyCode === 192) {
             if (ctrlStyle.display === "none") {
