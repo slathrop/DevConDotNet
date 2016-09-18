@@ -16,7 +16,7 @@ namespace DevCon
             var type = typeof(IConsoleCommand);
             var types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.GetTypes());
 
-            CommandTypes = types.Where(t => t.GetInterfaces().Contains(type)).ToList();
+            CommandTypes = types.Where(t => t.GetInterfaces().Contains(type)).OrderBy(t => t.Name).ToList();
         }
 
         // POST: api/webcli

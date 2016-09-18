@@ -2,8 +2,8 @@
 
 namespace DevCon
 {
-    [ConsoleCommand("cls", "Clears the console")]
-    public class CLS : IConsoleCommand
+    [ConsoleCommand("exit", "Exits the console")]
+    public class Exit : IConsoleCommand
     {
         public ConsoleResult Run(string[] args)
         {

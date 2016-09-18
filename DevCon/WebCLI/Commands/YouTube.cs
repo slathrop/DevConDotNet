@@ -7,7 +7,9 @@ namespace DevCon
     {
         public ConsoleResult Run(string[] args)
         {
-            throw new NotImplementedException();   //Implemented on client
+            // Implemented on client. This server-side code exists solely to provide the documentation
+            // in the "ConsoleCommand" attribute above
+            throw new NotImplementedException();
         }
     }
 }

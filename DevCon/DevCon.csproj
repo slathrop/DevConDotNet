@@ -98,6 +98,7 @@
     <Compile Include="WebCLI\Commands\CLS.cs" />
     <Compile Include="WebCLI\Commands\Echo.cs" />
     <Compile Include="WebCLI\Commands\DiskSpace.cs" />
+    <Compile Include="WebCLI\Commands\Exit.cs" />
     <Compile Include="WebCLI\Commands\Help.cs" />
     <Compile Include="WebCLI\Commands\Img.cs" />
     <Compile Include="WebCLI\Commands\YouTube.cs" />
