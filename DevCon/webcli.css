@@ -1,14 +1,14 @@
 /*Font
 -----------------------------------------------------*/
 .webcli, .webcli-input {
-    font: 20px/20px 'Lucida Console', 'Consolas', 'Courier New' !important;
+    font: 15px/15px 'Lucida Console', 'Consolas', 'Courier New' !important;
 }
 
 /*Control
 -----------------------------------------------------*/
 .webcli {
     background: rgba(0, 0, 0, .7);
-    height: 80%;
+    height: 85%;
     position: absolute;
     bottom: 0;
     left: 0;

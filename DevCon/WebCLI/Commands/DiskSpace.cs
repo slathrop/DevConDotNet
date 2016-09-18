@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 
 namespace DevCon
@@ -21,7 +22,7 @@ namespace DevCon
             {
                 foreach (var drive in drives)
                 {
-                    result += GetDriveSpace(drive);
+                    try { result += GetDriveSpace(drive); } catch (Exception) { }
                 }
             }
 
