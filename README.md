@@ -1,7 +1,7 @@
 # DevConDotNet
 Sample command-line interface implementation for an ASP.NET website (i.e., a "Web CLI") based on an example by CSaloio.
 
-<center>![Screenshot](screenshot.png)</center>
+<p align="center"><img src="screenshot.png"></p>
 
 ## Browser Requirements
 Note that this sample assumes that you are using a browser that supports:
