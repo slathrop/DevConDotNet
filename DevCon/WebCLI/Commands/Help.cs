@@ -12,7 +12,7 @@ namespace DevCon
         {
             var sb = new StringBuilder("<table class='webcli-tbl'>");
 
-            //Loop thru server commands
+            // Loop thru server commands
             foreach (var cmdType in WebCLIController.CommandTypes)
             {
                 var attr = cmdType.GetTypeInfo().GetCustomAttributes(WebCLIController.AttributeType)
@@ -23,6 +23,7 @@ namespace DevCon
                            + "</td> <td>:</td> <td class='webcli-val'>"
                            + HttpUtility.HtmlEncode(attr.Description) + "</td></tr>");
             }
+
             sb.Append("</table>");
             return new ConsoleResult(sb.ToString()) { isHTML = true };
         }

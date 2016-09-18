@@ -1,13 +1,16 @@
 class WebCLI {
     constructor() {
         var self = this;
-        self.history = [];     // Command history
-        self.cmdOffset = 0;    // Reverse offset into history
+        self.history = [];              // Command history
+        self.cmdOffset = 0;             // Reverse offset into history
 
         self.createElements();
         self.wireEvents();
         self.showGreeting();
         self.busy(false);
+
+        self.inMultiStepCmd = '';       // The name of the Cmd we're in the middle of, if any
+        self.multiStepCmdArgs = [];     // The args collected thus far for the Cmd we're in the middle of, if any
     }
 
     wireEvents() {
@@ -28,8 +31,8 @@ class WebCLI {
         var self = this, ctrlStyle = self.ctrlEl.style;
 
         // Shift+Ctrl+Backquote (Document)
-        if (e.shiftKey && e.ctrlKey && e.keyCode == 192) {
-            if (ctrlStyle.display == "none") {
+        if (e.shiftKey && e.ctrlKey && e.keyCode === 192) {
+            if (ctrlStyle.display === "none") {
                 ctrlStyle.display = "";
                 self.focus();
             }
@@ -49,7 +52,7 @@ class WebCLI {
                     return self.runCmd();
 
                 case 38: // Up
-                    if ((self.history.length + self.cmdOffset) > 0) {
+                    if (self.history.length + self.cmdOffset > 0) {
                         self.cmdOffset--;
                         self.inputEl.value = self.history[self.history.length + self.cmdOffset];
                         e.preventDefault();
@@ -110,7 +113,7 @@ class WebCLI {
             }
         })
         .catch(function () { self.writeLine("Error sending request to server", "error"); })
-        .then(function ()  //Finally
+        .then(function ()   // Finally
         {
             self.busy(false);
             self.focus();
