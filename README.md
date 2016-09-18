@@ -1,5 +1,5 @@
 # DevConDotNet
-Sample command-line interface implementation for an ASP.NET website (i.e., a "Web CLI") based on example by CSaloio.
+Sample command-line interface implementation for an ASP.NET website (i.e., a "Web CLI") based on an example by CSaloio.
 
 ## Browser Requirements
 Note that this sample assumes that you are using a browser that supports:
