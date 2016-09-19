@@ -13,10 +13,10 @@ namespace DevCon
 
         static WebCLIController()
         {
-            var type = typeof(IConsoleCommand);
-            var types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.GetTypes());
-
-            CommandTypes = types.Where(t => t.GetInterfaces().Contains(type)).OrderBy(t => t.Name).ToList();
+            var targetType = typeof(IConsoleCommand);
+            var assemblies = new Assembly[1] { Assembly.GetExecutingAssembly() };   // was: AppDomain.CurrentDomain.GetAssemblies()
+            var allTypes = assemblies.SelectMany(asm => asm.GetTypes());
+            CommandTypes = allTypes.Where(t => t.GetInterfaces().Contains(targetType)).OrderBy(t => t.Name).ToList();
         }
 
         // POST: api/webcli
